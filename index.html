@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="No mercy — клан Rust. Территория сильных."
+    />
+    <meta name="theme-color" content="#090909" />
+    <title>No mercy — клан Rust</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navigation" aria-label="Основная навигация">
+        <a class="navigation__home" href="#home">Главная</a>
+        <a class="navigation__rules" href="#rules">Правила</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home" aria-label="Клан No mercy">
+        <div class="hero__inner">
+          <div class="hero__main">
+            <div class="hero__copy">
+              <p class="hero__eyebrow">Клан в OldRust</p>
+              <h1>No <span>mercy</span></h1>
+              <svg class="hero__rule" viewBox="0 0 560 34" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path
+                  class="hero__rule-stroke"
+                  pathLength="1"
+                  d="M 6 23 C 70 8, 117 10, 177 15 C 245 21, 303 25, 365 22 C 425 18, 477 10, 532 7"
+                />
+              </svg>
+            </div>
+
+            <div class="clan-mark" aria-label="Эмблема Rust" role="img">
+              <img class="clan-mark__half clan-mark__half--first" src="assets/rust-mark.png" alt="" />
+              <img class="clan-mark__half clan-mark__half--second" src="assets/rust-mark.png" alt="" />
+            </div>
+          </div>
+
+          <div class="clan-stats" aria-label="Информация о клане">
+            <article class="clan-stat">
+              <h2 class="clan-stat__label">Дней клану</h2>
+              <p class="clan-stat__value" id="clan-days">6</p>
+              <img class="clan-stat__item" src="assets/items/scrap.png" alt="" aria-hidden="true" />
+            </article>
+            <article class="clan-stat">
+              <h2 class="clan-stat__label">Участники</h2>
+              <p class="clan-stat__value" id="member-count">14</p>
+              <img class="clan-stat__item" src="assets/items/rifle-ak.png" alt="" aria-hidden="true" />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="rules" id="rules" aria-labelledby="rules-title">
+        <div class="rules__content">
+          <p class="rules__eyebrow">No mercy · Rust</p>
+          <h2 id="rules-title">Правила войса</h2>
+          <p class="rules__intro">Чтобы всем было комфортно играть и общаться, соблюдай правила голосового чата.</p>
+
+          <section class="rules__group rules__group--required" aria-labelledby="required-title">
+            <h3 id="required-title">Обязательно</h3>
+            <ul>
+              <li>Перед тем как отойти, мьюти микрофон. Оставлять включённый микрофон с шумом крайне нежелательно.</li>
+              <li>Не ори в микрофон без причины. Говори нормально.</li>
+              <li>Не перебивай. Дай другому человеку договорить.</li>
+              <li>Во время серьёзных моментов (рейды, PvP, оборона хаты) разговоры только по делу.</li>
+              <li>Если тебя попросили замьютиться или заткнуться — делай это сразу, без нытья. Исключение — если просят из токсичных побуждений. Не развязывай серьёзный конфликт: это будет мешать другим.</li>
+            </ul>
+          </section>
+
+          <section class="rules__group rules__group--recommended" aria-labelledby="recommended-title">
+            <h3 id="recommended-title">Очень желательно</h3>
+            <p>Качественный микрофон — это круто, но мы понимаем, что не у всех есть деньги на хороший. Поэтому:</p>
+            <ul>
+              <li>Старайся, чтобы не было сильного эха, треска и постоянного громкого фона.</li>
+              <li>Если микрофон совсем плохой и мешает всем, лучше сиди на муте. Включай его только в нужные моменты.</li>
+            </ul>
+          </section>
+
+          <section class="rules__group rules__group--forbidden" aria-labelledby="forbidden-title">
+            <h3 id="forbidden-title">Запрещено</h3>
+            <ul>
+              <li>Частая токсичность, оскорбления и провокации.</li>
+              <li>Спам звуками и музыкой через микрофон.</li>
+              <li>Постоянный ор, истерики и создание хаоса.</li>
+              <li>Игнорирование просьб лидеров и модераторов.</li>
+            </ul>
+          </section>
+
+          <aside class="rules__penalties" aria-label="Последствия нарушений">
+            <p>Первое нарушение — предупреждение.</p>
+            <p>Повторное — мут или кик из войса.</p>
+            <p>Продолжаешь — вылет.</p>
+          </aside>
+
+          <p class="rules__closing">Этим правилам должен придерживаться каждый участник без исключений.</p>
+        </div>
+      </section>
+
+      <div class="ambient-items" aria-hidden="true">
+        <img class="ambient-item ambient-item--rocket" src="assets/items/rocket-basic.png" alt="" />
+        <img class="ambient-item ambient-item--jacket" src="assets/items/roadsign-jacket.png" alt="" />
+        <img class="ambient-item ambient-item--jackhammer" src="assets/items/jackhammer.png" alt="" />
+        <img class="ambient-item ambient-item--thompson" src="assets/items/thompson.png" alt="" />
+        <img class="ambient-item ambient-item--rifle" src="assets/items/rifle-ak.png" alt="" />
+        <img class="ambient-item ambient-item--scrap" src="assets/items/scrap.png" alt="" />
+      </div>
+    </main>
+  </body>
+</html>

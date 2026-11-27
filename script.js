@@ -125,6 +125,38 @@ function stopWheelAnimation() {
   }
 }
 
+function initializeScrollReveals() {
+  if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+    return;
+  }
+
+  const revealTargets = document.querySelectorAll(".rules__content > *");
+
+  if (revealTargets.length === 0) {
+    return;
+  }
+
+  document.documentElement.classList.add("motion-ready");
+
+  const observer = new IntersectionObserver((entries, currentObserver) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        currentObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: "0px 0px 12% 0px",
+  });
+
+  revealTargets.forEach((target, index) => {
+    target.classList.add("reveal-on-scroll");
+    target.style.setProperty("--reveal-delay", `${Math.min(index * 55, 220)}ms`);
+    observer.observe(target);
+  });
+}
+
 function initializeCursorTrail() {
   if (
     reducedMotion.matches ||
@@ -271,4 +303,5 @@ window.addEventListener("touchstart", stopWheelAnimation, { passive: true });
 window.addEventListener("resize", requestMarkUpdate);
 reducedMotion.addEventListener("change", requestMarkUpdate);
 updateMarkDrift();
+initializeScrollReveals();
 initializeCursorTrail();

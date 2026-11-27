@@ -18,10 +18,47 @@ html {
 }
 
 body {
+  position: relative;
+  isolation: isolate;
   margin: 0;
+  background: #090909;
+}
+
+body::before,
+body::after {
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+}
+
+body::before {
+  inset: 0;
   background:
-    radial-gradient(ellipse at 74% 48%, rgb(116 19 14 / 13%), transparent 36%),
-    #090909;
+    linear-gradient(rgb(255 255 255 / 2%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 2%) 1px, transparent 1px),
+    radial-gradient(ellipse at 74% 48%, rgb(116 19 14 / 18%), transparent 40%),
+    radial-gradient(ellipse at 18% 82%, rgb(116 19 14 / 10%), transparent 36%);
+  background-size: 88px 88px, 88px 88px, auto, auto;
+  mask-image: radial-gradient(ellipse at 52% 45%, #000 0%, #000 42%, transparent 100%);
+}
+
+body::after {
+  top: -34vmax;
+  right: -28vmax;
+  width: 76vmax;
+  height: 76vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(160 35 23 / 22%), transparent 68%);
+  filter: blur(26px);
+  opacity: 0.6;
+  animation: background-glow-drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes background-glow-drift {
+  to {
+    transform: translate3d(-12vw, 18vh, 0) scale(1.08);
+  }
 }
 
 main {
@@ -41,6 +78,22 @@ main {
   object-fit: contain;
   opacity: 0.76;
   filter: drop-shadow(0 3px 9px rgb(226 70 50 / 28%)) brightness(1.12);
+  animation: ambient-drift 7s ease-in-out infinite;
+}
+
+.ambient-item:nth-child(even) {
+  animation-delay: -3.5s;
+}
+
+@keyframes ambient-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -7px;
+  }
 }
 
 .ambient-item--rocket {
@@ -179,6 +232,7 @@ main {
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
+  animation: hero-rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 60ms both;
 }
 
 h1 {
@@ -188,6 +242,7 @@ h1 {
   letter-spacing: -0.085em;
   line-height: 0.88;
   white-space: nowrap;
+  animation: hero-rise 760ms cubic-bezier(0.2, 0.7, 0.2, 1) 150ms both;
 }
 
 h1 span {
@@ -228,6 +283,7 @@ h1 span {
   width: min(39vw, 440px);
   aspect-ratio: 1;
   filter: drop-shadow(0 18px 52px rgb(204 58 36 / 16%));
+  animation: hero-rise 850ms cubic-bezier(0.2, 0.7, 0.2, 1) 230ms both;
 }
 
 .clan-mark__half {
@@ -261,6 +317,19 @@ h1 span {
   width: min(560px, 100%);
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  animation: hero-rise 760ms cubic-bezier(0.2, 0.7, 0.2, 1) 330ms both;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .clan-stat {
@@ -271,6 +340,27 @@ h1 span {
   border-radius: 16px;
   background: linear-gradient(135deg, rgb(255 255 255 / 5%), rgb(226 70 50 / 4%));
   box-shadow: 0 12px 36px rgb(0 0 0 / 18%);
+  transition:
+    transform 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.clan-stat:hover {
+  transform: translateY(-4px);
+  border-color: rgb(226 70 50 / 45%);
+  box-shadow: 0 18px 42px rgb(0 0 0 / 28%), 0 0 24px rgb(226 70 50 / 8%);
+}
+
+.clan-stat__item {
+  transition:
+    opacity 240ms ease,
+    filter 240ms ease;
+}
+
+.clan-stat:hover .clan-stat__item {
+  opacity: 1;
+  filter: drop-shadow(0 3px 12px rgb(226 70 50 / 45%)) brightness(1.18);
 }
 
 .clan-stat__label {
@@ -316,8 +406,8 @@ h1 span {
   padding: 100px 24px 120px;
   scroll-margin-top: 96px;
   background:
-    radial-gradient(ellipse at 50% 0, rgb(116 19 14 / 13%), transparent 48%),
-    #0d0d0d;
+    radial-gradient(ellipse at 50% 0, rgb(116 19 14 / 15%), transparent 48%),
+    linear-gradient(180deg, rgb(13 13 13 / 90%), rgb(13 13 13 / 96%));
 }
 
 .rules__content {
@@ -353,6 +443,15 @@ h1 span {
   margin: 0 0 30px;
   padding-left: 18px;
   border-left: 2px solid #e24632;
+  transition:
+    border-color 220ms ease,
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+.rules__group:hover {
+  transform: translateX(3px);
+  filter: drop-shadow(0 0 8px rgb(226 70 50 / 12%));
 }
 
 .rules__group h3 {
@@ -414,6 +513,20 @@ h1 span {
   font-size: 16px;
   font-weight: 700;
   line-height: 1.6;
+}
+
+.motion-ready .reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 620ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 620ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-ready .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 1023px) {
@@ -524,8 +637,23 @@ h1 span {
     scroll-behavior: auto;
   }
 
+  .ambient-item {
+    animation: none;
+  }
+
+  body::after {
+    animation: none;
+  }
+
   .site-header {
     transition: none;
+  }
+
+  .hero__eyebrow,
+  h1,
+  .clan-mark,
+  .clan-stats {
+    animation: none;
   }
 
   .hero__rule-stroke {
@@ -533,4 +661,15 @@ h1 span {
     animation: none;
   }
 
+  .motion-ready .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .clan-stat,
+  .clan-stat__item,
+  .rules__group {
+    transition: none;
+  }
 }
